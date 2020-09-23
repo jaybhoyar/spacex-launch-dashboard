@@ -1,0 +1,23 @@
+@import "./reset.scss";
+
+body {
+	font-family: "Montserrat", sans-serif;
+	font-weight: 400;
+	box-sizing: border-box;
+	outline: none !important;
+}
+.header-container {
+	background-color: rgb(29, 28, 28);
+	height: 58px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	.logo-container {
+		width: 86%;
+		img {
+			width: 13%;
+			height: 20px;
+		}
+	}
+}
