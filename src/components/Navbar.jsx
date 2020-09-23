@@ -1,6 +1,6 @@
 import React from "react";
 
-function Header() {
+function Navbar() {
 	return (
 		<div className="header-container">
 			<div className="logo-container">
@@ -10,4 +10,4 @@ function Header() {
 	);
 }
 
-export default Header;
+export default Navbar;
