@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "semantic-ui-react";
 
-function LaunchList() {
+function LaunchList({ getModalDetails }) {
 	return (
 		<div className="table-container">
 			<Table celled color="blue">
@@ -20,7 +20,7 @@ function LaunchList() {
 				</Table.Header>
 
 				<Table.Body>
-					<Table.Row>
+					<Table.Row onClick={() => getModalDetails("flight no 4")}>
 						<Table.Cell>Cell</Table.Cell>
 						<Table.Cell>Cell</Table.Cell>
 						<Table.Cell>Cell</Table.Cell>
