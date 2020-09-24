@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactModal from "react-modal";
 
 ReactModal.setAppElement("#root");
@@ -17,10 +17,8 @@ function Modal({ modalStatus, handleClose, launchDetails }) {
 				},
 				content: {
 					position: "absolute",
-					top: "40px",
-					left: "40px",
-					right: "40px",
-					bottom: "40px",
+					left: "50%",
+					transform: "translateX(-50%)",
 					border: "1px solid #ccc",
 					background: "#fff",
 					overflow: "auto",
@@ -28,8 +26,8 @@ function Modal({ modalStatus, handleClose, launchDetails }) {
 					borderRadius: "4px",
 					outline: "none",
 					padding: "20px",
-					width: "500px",
-					height: "250px",
+					width: "700px",
+					height: "500px",
 					margin: "0 auto",
 				},
 			}}
