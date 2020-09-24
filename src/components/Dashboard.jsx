@@ -1,5 +1,5 @@
 import React from "react";
-import { Dropdown, Form } from "semantic-ui-react";
+import { Table, Dropdown, Form } from "semantic-ui-react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -98,7 +98,59 @@ function Dashboard() {
 						</div>
 					</div>
 				</div>
-				<div className="table-container"></div>
+				<div className="table-container">
+					<Table celled color="blue">
+						<Table.Header>
+							<Table.Row>
+								<Table.HeaderCell>Header</Table.HeaderCell>
+								<Table.HeaderCell>Header</Table.HeaderCell>
+								<Table.HeaderCell>Header</Table.HeaderCell>
+								<Table.HeaderCell>Header</Table.HeaderCell>
+								<Table.HeaderCell>Header</Table.HeaderCell>
+								<Table.HeaderCell>Header</Table.HeaderCell>
+								<Table.HeaderCell>Header</Table.HeaderCell>
+								<Table.HeaderCell>Header</Table.HeaderCell>
+								<Table.HeaderCell>Header</Table.HeaderCell>
+							</Table.Row>
+						</Table.Header>
+
+						<Table.Body>
+							<Table.Row>
+								<Table.Cell>Cell</Table.Cell>
+								<Table.Cell>Cell</Table.Cell>
+								<Table.Cell>Cell</Table.Cell>
+								<Table.Cell>Cell</Table.Cell>
+								<Table.Cell>Cell</Table.Cell>
+								<Table.Cell>Cell</Table.Cell>
+								<Table.Cell>Cell</Table.Cell>
+								<Table.Cell>Cell</Table.Cell>
+								<Table.Cell>Cell</Table.Cell>
+							</Table.Row>
+							<Table.Row>
+								<Table.Cell>Cell</Table.Cell>
+								<Table.Cell>Cell</Table.Cell>
+								<Table.Cell>Cell</Table.Cell>
+								<Table.Cell>Cell</Table.Cell>
+								<Table.Cell>Cell</Table.Cell>
+								<Table.Cell>Cell</Table.Cell>
+								<Table.Cell>Cell</Table.Cell>
+								<Table.Cell>Cell</Table.Cell>
+								<Table.Cell>Cell</Table.Cell>
+							</Table.Row>
+							<Table.Row>
+								<Table.Cell>Cell</Table.Cell>
+								<Table.Cell>Cell</Table.Cell>
+								<Table.Cell>Cell</Table.Cell>
+								<Table.Cell>Cell</Table.Cell>
+								<Table.Cell>Cell</Table.Cell>
+								<Table.Cell>Cell</Table.Cell>
+								<Table.Cell>Cell</Table.Cell>
+								<Table.Cell>Cell</Table.Cell>
+								<Table.Cell>Cell</Table.Cell>
+							</Table.Row>
+						</Table.Body>
+					</Table>
+				</div>
 			</div>
 		</>
 	);
