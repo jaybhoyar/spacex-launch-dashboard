@@ -45,21 +45,28 @@ body #fonts {
 .timeline-filter {
 	width: 50%;
 	margin: 0 auto 1.5rem auto !important;
-	border: 1px solid #fdc400;
+}
+.text-align-center {
+	text-align: center !important;
 }
 
 .filter-name-label {
-	text-align: center;
-	font-size: 1.1rem !important;
-	font-weight: 300 !important;
+	font-size: 0.9rem !important;
 	letter-spacing: 0.1rem !important;
-	padding: 1rem 0;
+	margin-bottom: 0.8rem !important;
+	font-weight: 500 !important;
 	text-transform: uppercase !important;
 }
 
 .multiple-filters {
-	border: 1px solid #df2dd6;
-	padding: 1rem 1.5rem;
+	// border: 1px solid #df2dd6;
+	padding: 1rem 0;
+	display: flex;
+	justify-content: space-around;
 	.date-filter {
+		width: 40%;
+	}
+	.status-filter {
+		width: 25%;
 	}
 }
