@@ -4,11 +4,13 @@ import FilterByTimeline from "./FilterByTimeline";
 import FilterByDate from "./FilterByDate";
 import FilterByStatus from "./FilterByStatus";
 import LaunchList from "./LaunchList";
+import Modal from "./Modal";
 
 function Dashboard() {
 	return (
 		<>
-			<div className="dashboard-container">
+			<Modal />
+			{/* <div className="dashboard-container">
 				<div className="filters-container">
 					<FilterByTimeline />
 					<div className="multiple-filters">
@@ -17,7 +19,7 @@ function Dashboard() {
 					</div>
 				</div>
 				<LaunchList />
-			</div>
+			</div> */}
 		</>
 	);
 }
