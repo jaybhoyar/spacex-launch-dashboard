@@ -1,8 +1,14 @@
 import React from "react";
-import "./App.css";
+import Navbar from "./components/Navbar";
+import Dashboard from "./components/Dashboard";
 
 function App() {
-	return <div className="App"></div>;
+	return (
+		<div className="App" id="fonts">
+			<Navbar />
+			<Dashboard />
+		</div>
+	);
 }
 
 export default App;
