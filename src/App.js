@@ -6,7 +6,9 @@ function App() {
 	return (
 		<div className="App" id="fonts">
 			<Navbar />
-			<Dashboard />
+			<div className="main-container">
+				<Dashboard />
+			</div>
 		</div>
 	);
 }

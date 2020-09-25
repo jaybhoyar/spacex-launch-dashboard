@@ -6,6 +6,12 @@ import FilterByStatus from "./FilterByStatus";
 import LaunchList from "./LaunchList";
 
 function Dashboard() {
+	// const [ModalIsOpen, setModalIsOpen] = useState(false);
+	// const [launchDetails, setLaunchDetails] = useState({});
+	// const handleClose = () => setModalIsOpen(false);
+	// const handleShow = () => setModalIsOpen(true);
+	// const modalDetails = (details) => setLaunchDetails(details);
+
 	return (
 		<>
 			<div className="dashboard-container">
