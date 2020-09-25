@@ -12,7 +12,7 @@ function Modal({ modalStatus, handleClose, launchDetails }) {
 					left: 0,
 					right: 0,
 					bottom: 0,
-					backgroundColor: "rgba(255, 255, 255, 0.75)",
+					backgroundColor: "transparent",
 					zIndex: 1000,
 				},
 				content: {
@@ -23,20 +23,25 @@ function Modal({ modalStatus, handleClose, launchDetails }) {
 					background: "#fff",
 					overflow: "auto",
 					WebkitOverflowScrolling: "touch",
-					borderRadius: "4px",
+					borderRadius: "6px",
 					outline: "none",
-					padding: "20px",
 					width: "700px",
 					height: "500px",
+					padding: "0px !important",
 					margin: "0 auto",
 				},
 			}}
 			isOpen={modalStatus}
 			onRequestClose={handleClose}
 		>
-			<h2>{launchDetails}</h2>
-			<p>Modal Body</p>
-			<button onClick={handleClose}>Close Modal</button>
+			<div className="modal-container">
+				<div className="modal-header">
+					<p className="mission-heading">Flight</p>
+					<button onClick={handleClose}>X</button>
+				</div>
+				<h2>{launchDetails}</h2>
+				<p>Modal Body</p>
+			</div>
 		</ReactModal>
 	);
 }
