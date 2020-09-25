@@ -1,5 +1,9 @@
-@import "./reset.scss";
+// @import "./reset.scss";
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&display=swap");
 
+html {
+	font-size: 16px;
+}
 body {
 	font-weight: 400;
 	box-sizing: border-box;
@@ -50,20 +54,34 @@ body #fonts {
 }
 
 .filter-name-label {
-	font-size: 1.1rem !important;
+	font-size: 1.25rem !important;
 	letter-spacing: 0.1rem !important;
 	margin-bottom: 0.8rem !important;
 	font-weight: 400 !important;
 	text-transform: uppercase !important;
 }
-
+.ui.dropdown > .text {
+	font-size: 1.15rem !important;
+	letter-spacing: 0.3px !important;
+}
 .multiple-filters {
 	// border: 1px solid #df2dd6;
 	padding: 1rem 0;
 	display: flex;
 	justify-content: space-around;
+	align-items: center;
 	.date-filter {
 		width: 40%;
+		display: flex;
+		justify-content: space-around;
+		input {
+			outline: none;
+			width: 100%;
+			font-family: "Jost", sans-serif !important ;
+			border: 1px solid rgba(34, 36, 38, 0.15);
+			border-radius: 0.28571429rem;
+			padding: 0.5rem 0.8rem;
+		}
 	}
 	.status-filter {
 		width: 25%;
@@ -120,6 +138,7 @@ th {
 	text-transform: uppercase !important;
 	letter-spacing: 0.1rem;
 	font-weight: 500 !important;
+	font-size: 1rem !important;
 }
 td {
 	letter-spacing: 0.6px;

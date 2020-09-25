@@ -9,6 +9,8 @@ import LaunchList from "./LaunchList";
 function Dashboard() {
 	const [launches, setlaunches] = useState([]);
 	const [searchTerm, setSearchTerm] = useState("");
+	const [startDate, setStartDate] = useState("");
+	const [endDate, setEndDate] = useState("");
 
 	const getLaunches = async () => {
 		try {
@@ -25,13 +27,22 @@ function Dashboard() {
 		getLaunches();
 	}, [searchTerm]);
 
+	useEffect(() => {
+		getLaunches();
+	}, []);
+
 	return (
 		<>
 			<div className="dashboard-container">
 				<div className="filters-container">
 					<FilterByTimeline setSearchTerm={setSearchTerm} />
 					<div className="multiple-filters">
-						<FilterByDate />
+						<FilterByDate
+							startDate={startDate}
+							endDate={endDate}
+							setStartDate={setStartDate}
+							setEndDate={setEndDate}
+						/>
 						<FilterByStatus />
 					</div>
 				</div>
