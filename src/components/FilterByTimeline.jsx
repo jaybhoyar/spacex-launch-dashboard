@@ -19,17 +19,25 @@ const launchTimelines = [
 	},
 ];
 
-function FilterByTimeline() {
+function FilterByTimeline({ setSearchTerm }) {
+	const handleChange = (e, { value }) => {
+		console.log(value);
+		if (value === "All") {
+			value = "";
+		}
+		setSearchTerm(value);
+	};
 	return (
 		<div className="timeline-filter">
 			<p className="filter-name-label text-align-center">
 				Launch Timeline
 			</p>
 			<Dropdown
-				placeholder="Select Launch Timeline"
 				fluid
 				selection
+				defaultValue="All"
 				options={launchTimelines}
+				onChange={handleChange}
 			/>
 		</div>
 	);

@@ -27,7 +27,7 @@ body #fonts {
 	}
 }
 .main-container {
-	background: url("https://images.unsplash.com/photo-1517976547714-720226b864c1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2400&q=80");
+	background: url("/spacex-bg.jpg");
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: cover;
@@ -37,7 +37,6 @@ body #fonts {
 	margin: 0 auto !important;
 	display: flex;
 	flex-direction: column;
-	border: 1px solid rgb(57, 251, 132);
 	.filters-container {
 		padding: 1.7rem 0;
 	}
@@ -100,14 +99,18 @@ table {
 	background-color: rgba(0, 0, 0, 0.54);
 }
 .table-heading {
-	width: 200px !important;
+	width: 20% !important;
+}
+.table-heading-small {
+	width: 140px !important;
 }
 tbody tr {
 	cursor: pointer;
-	background-color: rgb(246, 246, 246);
+	background-color: rgb(247, 247, 247);
 	transition: transform 0.4s !important;
 	&:hover {
 		transform: scale(1.03) !important;
+		background-color: rgb(255, 255, 255);
 		border: 1px solid rgb(105, 105, 105);
 		box-shadow: 0 4px 13px -3px rgba(0, 0, 0, 0.10196);
 	}
@@ -122,5 +125,5 @@ td {
 	letter-spacing: 0.6px;
 	font-size: 1rem !important;
 	padding: 0.5rem 0 !important;
-	color: rgb(54, 115, 228) !important;
+	color: rgb(54, 95, 228) !important;
 }

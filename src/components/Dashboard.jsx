@@ -8,12 +8,12 @@ import LaunchList from "./LaunchList";
 
 function Dashboard() {
 	const [launches, setlaunches] = useState([]);
-	const [searchFilter, setSearchFilter] = useState("");
+	const [searchTerm, setSearchTerm] = useState("");
 
 	const getLaunches = async () => {
 		try {
 			const res = await axios.get(
-				`https://api.spacexdata.com/v3/launches/`
+				`https://api.spacexdata.com/v3/launches/${searchTerm}`
 			);
 			// console.log(res.data);
 			setlaunches(res.data);
@@ -23,13 +23,13 @@ function Dashboard() {
 	};
 	useEffect(() => {
 		getLaunches();
-	}, []);
+	}, [searchTerm]);
 
 	return (
 		<>
 			<div className="dashboard-container">
 				<div className="filters-container">
-					<FilterByTimeline />
+					<FilterByTimeline setSearchTerm={setSearchTerm} />
 					<div className="multiple-filters">
 						<FilterByDate />
 						<FilterByStatus />
