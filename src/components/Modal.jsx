@@ -12,7 +12,7 @@ function Modal({ modalStatus, handleClose, launchDetails }) {
 					left: 0,
 					right: 0,
 					bottom: 0,
-					backgroundColor: "transparent",
+					backgroundColor: "rgba(192,192,192,0.6)",
 					zIndex: 1000,
 				},
 				content: {
