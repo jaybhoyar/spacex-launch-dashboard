@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Table } from "semantic-ui-react";
 import Modal from "./Modal";
 
-function LaunchList() {
+function LaunchList({ launches }) {
 	const [ModalIsOpen, setModalIsOpen] = useState(false);
 	const [launchDetails, setLaunchDetails] = useState({});
 	const handleClose = () => setModalIsOpen(false);
@@ -11,6 +11,7 @@ function LaunchList() {
 		setModalIsOpen(true);
 		setLaunchDetails(launch);
 	};
+
 	return (
 		<>
 			{ModalIsOpen ? (
@@ -24,52 +25,51 @@ function LaunchList() {
 					<Table celled color="blue">
 						<Table.Header>
 							<Table.Row>
-								<Table.HeaderCell>Header</Table.HeaderCell>
-								<Table.HeaderCell>Header</Table.HeaderCell>
-								<Table.HeaderCell>Header</Table.HeaderCell>
-								<Table.HeaderCell>Header</Table.HeaderCell>
-								<Table.HeaderCell>Header</Table.HeaderCell>
-								<Table.HeaderCell>Header</Table.HeaderCell>
-								<Table.HeaderCell>Header</Table.HeaderCell>
-								<Table.HeaderCell>Header</Table.HeaderCell>
-								<Table.HeaderCell>Header</Table.HeaderCell>
+								<Table.HeaderCell>Flight No.</Table.HeaderCell>
+								<Table.HeaderCell>Mission</Table.HeaderCell>
+								<Table.HeaderCell>Orbit</Table.HeaderCell>
+								<Table.HeaderCell>Rocket</Table.HeaderCell>
+								<Table.HeaderCell>Location</Table.HeaderCell>
+								<Table.HeaderCell>Date</Table.HeaderCell>
+								<Table.HeaderCell>Status</Table.HeaderCell>
 							</Table.Row>
 						</Table.Header>
 
 						<Table.Body>
-							<Table.Row onClick={() => handleEvents("Flight")}>
-								<Table.Cell>Cell</Table.Cell>
-								<Table.Cell>Cell</Table.Cell>
-								<Table.Cell>Cell</Table.Cell>
-								<Table.Cell>Cell</Table.Cell>
-								<Table.Cell>Cell</Table.Cell>
-								<Table.Cell>Cell</Table.Cell>
-								<Table.Cell>Cell</Table.Cell>
-								<Table.Cell>Cell</Table.Cell>
-								<Table.Cell>Cell</Table.Cell>
-							</Table.Row>
-							<Table.Row>
-								<Table.Cell>Cell</Table.Cell>
-								<Table.Cell>Cell</Table.Cell>
-								<Table.Cell>Cell</Table.Cell>
-								<Table.Cell>Cell</Table.Cell>
-								<Table.Cell>Cell</Table.Cell>
-								<Table.Cell>Cell</Table.Cell>
-								<Table.Cell>Cell</Table.Cell>
-								<Table.Cell>Cell</Table.Cell>
-								<Table.Cell>Cell</Table.Cell>
-							</Table.Row>
-							<Table.Row>
-								<Table.Cell>Cell</Table.Cell>
-								<Table.Cell>Cell</Table.Cell>
-								<Table.Cell>Cell</Table.Cell>
-								<Table.Cell>Cell</Table.Cell>
-								<Table.Cell>Cell</Table.Cell>
-								<Table.Cell>Cell</Table.Cell>
-								<Table.Cell>Cell</Table.Cell>
-								<Table.Cell>Cell</Table.Cell>
-								<Table.Cell>Cell</Table.Cell>
-							</Table.Row>
+							{launches.map((launch) => {
+								return (
+									<Table.Row
+										onClick={() => handleEvents("Flight")}
+									>
+										<Table.Cell>
+											{launch.flight_number}
+										</Table.Cell>
+										<Table.Cell>
+											{launch.mission_name}
+										</Table.Cell>
+										<Table.Cell>
+											{
+												launch.rocket.second_stage
+													.payloads[0].orbit
+											}
+										</Table.Cell>
+										<Table.Cell>
+											{launch.rocket.rocket_name}
+										</Table.Cell>
+										<Table.Cell>
+											{launch.launch_site.site_name}
+										</Table.Cell>
+										<Table.Cell>
+											{launch.launch_date_utc}
+										</Table.Cell>
+										<Table.Cell>
+											{launch.launch_success
+												? "true"
+												: "false"}
+										</Table.Cell>
+									</Table.Row>
+								);
+							})}
 						</Table.Body>
 					</Table>
 				</div>
