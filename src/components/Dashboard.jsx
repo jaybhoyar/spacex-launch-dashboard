@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import FilterByTimeline from "./FilterByTimeline";
 import FilterByDate from "./FilterByDate";
@@ -6,12 +7,22 @@ import FilterByStatus from "./FilterByStatus";
 import LaunchList from "./LaunchList";
 
 function Dashboard() {
-	// const [ModalIsOpen, setModalIsOpen] = useState(false);
-	// const [launchDetails, setLaunchDetails] = useState({});
-	// const handleClose = () => setModalIsOpen(false);
-	// const handleShow = () => setModalIsOpen(true);
-	// const modalDetails = (details) => setLaunchDetails(details);
+	const [launches, setlaunches] = useState([]);
 
+	const getLaunches = async () => {
+		try {
+			const launches = await axios.get(
+				"https://api.spacexdata.com/v3/launches"
+			);
+			console.log(launches.data);
+			setlaunches(launches.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+	useEffect(() => {
+		getLaunches();
+	});
 	return (
 		<>
 			<div className="dashboard-container">
@@ -22,7 +33,7 @@ function Dashboard() {
 						<FilterByStatus />
 					</div>
 				</div>
-				<LaunchList />
+				<LaunchList launches={launches} />
 			</div>
 		</>
 	);
