@@ -25,7 +25,7 @@ function FilterByTimeline({ setSearchTerm }) {
 		if (value === "All") {
 			value = "";
 		}
-		setSearchTerm(value);
+		setSearchTerm(`/${value}`);
 	};
 	return (
 		<div className="timeline-filter">

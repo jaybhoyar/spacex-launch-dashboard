@@ -28,4 +28,6 @@ const getFormattedDate = (utcDate) => {
 	return moment(utcDate).utc().format("DD MMMM YYYY HH:mm");
 };
 
+const generateSearchTerm = ({}) => {};
+
 export { getStatusLabel, getFormattedDate };

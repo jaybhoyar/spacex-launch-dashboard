@@ -9,13 +9,13 @@ import LaunchList from "./LaunchList";
 function Dashboard() {
 	const [launches, setlaunches] = useState([]);
 	const [searchTerm, setSearchTerm] = useState("");
-	const [startDate, setStartDate] = useState("");
-	const [endDate, setEndDate] = useState("");
+	const [startDate, setStartDate] = useState(null);
+	const [endDate, setEndDate] = useState(null);
 
 	const getLaunches = async () => {
 		try {
 			const res = await axios.get(
-				`https://api.spacexdata.com/v3/launches/${searchTerm}`
+				`https://api.spacexdata.com/v3/launches${searchTerm}`
 			);
 			// console.log(res.data);
 			setlaunches(res.data);
@@ -23,13 +23,16 @@ function Dashboard() {
 			console.log(error);
 		}
 	};
+
 	useEffect(() => {
 		getLaunches();
 	}, [searchTerm]);
 
 	useEffect(() => {
-		getLaunches();
-	}, []);
+		if (startDate || endDate) {
+			setSearchTerm(`?start=${startDate}&end=${endDate}`);
+		}
+	}, [startDate, endDate]);
 
 	return (
 		<>
