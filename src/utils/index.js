@@ -28,6 +28,17 @@ const getFormattedDate = (utcDate) => {
 	return moment(utcDate).utc().format("DD MMMM YYYY HH:mm");
 };
 
+// const dateValidator = (startDate, endDate) => {
+// 	if (startDate && endDate) {
+// 		if (!moment(startDate).isBefore(moment(endDate))) {
+// 			return false;
+// 		} else {
+// 			return true;
+// 		}
+// 	}
+// 	// return true;
+// };
+
 const generateSearchTerm = ({
 	timeline,
 	startDate,
@@ -35,21 +46,33 @@ const generateSearchTerm = ({
 	status,
 	setSearchTerm,
 }) => {
-	if (status === true) {
-		setSearchTerm(`?launch_success=${status}`);
-	} else if (status === false) {
-		setSearchTerm(`?launch_success=${status}`);
-	} else if (status === "All") {
-		setSearchTerm(``);
+	let searchTerm = [];
+	if (startDate) {
+		startDate = moment(startDate).format("YYYY-MM-DD");
+		searchTerm.push(`start=${startDate}`);
+		if (!endDate) {
+			searchTerm.push(`end=2030-01-01`);
+		}
 	}
-	if (timeline && !startDate && !endDate) {
-		setSearchTerm(timeline);
-	} else if (timeline && startDate && endDate) {
-		setSearchTerm(`${timeline}?start=${startDate}&end=${endDate}`);
-	} else if (endDate && !startDate) {
-		setSearchTerm(`?start=2006-01-01&end=${endDate}`);
-	} else if (startDate && !endDate) {
-		setSearchTerm(`?start=${startDate}&end=2030-01-01`);
+	if (endDate) {
+		endDate = moment(endDate).format("YYYY-MM-DD");
+		searchTerm.push(`end=${endDate}`);
+		if (!startDate) {
+			searchTerm.push(`start=2002-05-06&`);
+		}
+	}
+
+	if (status === true) {
+		searchTerm.push(`launch_success=${status}`);
+	} else if (status === false) {
+		searchTerm.push(`launch_success=false`);
+	}
+	searchTerm = searchTerm.join("&");
+	if (timeline !== "All") {
+		console.log(timeline);
+		setSearchTerm(`/${timeline}?${searchTerm}`);
+	} else {
+		setSearchTerm(`?${searchTerm}`);
 	}
 };
 

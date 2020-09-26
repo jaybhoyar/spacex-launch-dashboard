@@ -3,28 +3,25 @@ import { Dropdown } from "semantic-ui-react";
 
 const launchTimelines = [
 	{
-		key: "All Launches",
-		text: "All ",
+		key: "All",
+		text: "All Launches",
 		value: "All",
 	},
 	{
 		key: "Upcoming",
 		text: "Upcoming Launches",
-		value: "Upcoming",
+		value: "upcoming",
 	},
 	{
 		key: "Past",
 		text: "Past Launches",
-		value: "Past",
+		value: "past",
 	},
 ];
 
 function FilterByTimeline({ setTimeline }) {
 	const handleChange = (e, { value }) => {
-		if (value === "All") {
-			value = "";
-		}
-		setTimeline(`/${value}`);
+		setTimeline(value);
 	};
 	return (
 		<div className="timeline-filter">
