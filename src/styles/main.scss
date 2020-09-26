@@ -13,6 +13,10 @@ body {
 body #fonts {
 	font-family: "Jost", sans-serif !important;
 }
+a {
+	outline: none !important;
+	cursor: pointer;
+}
 .center-div {
 	display: flex;
 	justify-content: center;
@@ -145,4 +149,8 @@ td {
 	font-size: 1rem !important;
 	padding: 0.5rem 0 !important;
 	color: rgb(54, 95, 228) !important;
+}
+
+.pagination-container {
+	margin: 1rem auto !important;
 }

@@ -5,6 +5,7 @@ import FilterByTimeline from "./FilterByTimeline";
 import FilterByDate from "./FilterByDate";
 import FilterByStatus from "./FilterByStatus";
 import LaunchList from "./LaunchList";
+import Paginate from "./Paginate";
 import { generateSearchTerm } from "../utils/index";
 
 function Dashboard() {
@@ -57,6 +58,7 @@ function Dashboard() {
 					</div>
 				</div>
 				<LaunchList launches={launches} />
+				<Paginate />
 			</div>
 		</>
 	);
