@@ -32,8 +32,16 @@ const generateSearchTerm = ({
 	timeline,
 	startDate,
 	endDate,
+	status,
 	setSearchTerm,
 }) => {
+	if (status === true) {
+		setSearchTerm(`?launch_success=${status}`);
+	} else if (status === false) {
+		setSearchTerm(`?launch_success=${status}`);
+	} else if (status === "All") {
+		setSearchTerm(``);
+	}
 	if (timeline && !startDate && !endDate) {
 		setSearchTerm(timeline);
 	} else if (timeline && startDate && endDate) {

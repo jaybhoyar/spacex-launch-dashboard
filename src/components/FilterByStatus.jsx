@@ -10,24 +10,28 @@ const launchStatuses = [
 	{
 		key: "Successful",
 		text: "Successful",
-		value: "Successful",
+		value: true,
 	},
 	{
 		key: "Failed",
 		text: "Failed",
-		value: "Failed",
+		value: false,
 	},
 ];
 
-function FilterByStatus() {
+function FilterByStatus({ setStatus }) {
+	const handleChange = (e, { value }) => {
+		setStatus(value);
+	};
 	return (
 		<div className="status-filter">
 			<p className="filter-name-label text-align-center">Launch Status</p>
 			<Dropdown
-				placeholder="Select Launch Status"
 				fluid
 				selection
+				defaultValue="All"
 				options={launchStatuses}
+				onChange={handleChange}
 			/>
 		</div>
 	);

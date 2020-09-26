@@ -13,6 +13,7 @@ function Dashboard() {
 	const [timeline, setTimeline] = useState("");
 	const [startDate, setStartDate] = useState(null);
 	const [endDate, setEndDate] = useState(null);
+	const [status, setStatus] = useState("");
 
 	const getLaunches = async () => {
 		try {
@@ -27,11 +28,18 @@ function Dashboard() {
 
 	useEffect(() => {
 		getLaunches();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchTerm]);
 
 	useEffect(() => {
-		generateSearchTerm({ timeline, startDate, endDate, setSearchTerm });
-	}, [timeline, startDate, endDate]);
+		generateSearchTerm({
+			timeline,
+			startDate,
+			endDate,
+			status,
+			setSearchTerm,
+		});
+	}, [timeline, startDate, endDate, status]);
 
 	return (
 		<>
@@ -45,7 +53,7 @@ function Dashboard() {
 							setStartDate={setStartDate}
 							setEndDate={setEndDate}
 						/>
-						<FilterByStatus />
+						<FilterByStatus setStatus={setStatus} />
 					</div>
 				</div>
 				<LaunchList launches={launches} />
