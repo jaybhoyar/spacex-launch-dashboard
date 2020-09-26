@@ -28,4 +28,21 @@ const getFormattedDate = (utcDate) => {
 	return moment(utcDate).utc().format("DD MMMM YYYY HH:mm");
 };
 
-export { getStatusLabel, getFormattedDate };
+const generateSearchTerm = ({
+	timeline,
+	startDate,
+	endDate,
+	setSearchTerm,
+}) => {
+	if (timeline && !startDate && !endDate) {
+		setSearchTerm(timeline);
+	} else if (timeline && startDate && endDate) {
+		setSearchTerm(`${timeline}?start=${startDate}&end=${endDate}`);
+	} else if (endDate && !startDate) {
+		setSearchTerm(`?start=2006-01-01&end=${endDate}`);
+	} else if (startDate && !endDate) {
+		setSearchTerm(`?start=${startDate}&end=2030-01-01`);
+	}
+};
+
+export { getStatusLabel, getFormattedDate, generateSearchTerm };

@@ -19,13 +19,12 @@ const launchTimelines = [
 	},
 ];
 
-function FilterByTimeline({ setSearchTerm }) {
+function FilterByTimeline({ setTimeline }) {
 	const handleChange = (e, { value }) => {
-		console.log(value);
 		if (value === "All") {
 			value = "";
 		}
-		setSearchTerm(value);
+		setTimeline(`/${value}`);
 	};
 	return (
 		<div className="timeline-filter">
