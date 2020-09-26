@@ -5,10 +5,12 @@ import FilterByTimeline from "./FilterByTimeline";
 import FilterByDate from "./FilterByDate";
 import FilterByStatus from "./FilterByStatus";
 import LaunchList from "./LaunchList";
+import { generateSearchTerm } from "../utils/index";
 
 function Dashboard() {
 	const [launches, setlaunches] = useState([]);
 	const [searchTerm, setSearchTerm] = useState("");
+	const [timeline, setTimeline] = useState("");
 	const [startDate, setStartDate] = useState(null);
 	const [endDate, setEndDate] = useState(null);
 
@@ -17,7 +19,6 @@ function Dashboard() {
 			const res = await axios.get(
 				`https://api.spacexdata.com/v3/launches${searchTerm}`
 			);
-			// console.log(res.data);
 			setlaunches(res.data);
 		} catch (error) {
 			console.log(error);
@@ -29,16 +30,14 @@ function Dashboard() {
 	}, [searchTerm]);
 
 	useEffect(() => {
-		if (startDate || endDate) {
-			setSearchTerm(`?start=${startDate}&end=${endDate}`);
-		}
-	}, [startDate, endDate]);
+		generateSearchTerm({ timeline, startDate, endDate, setSearchTerm });
+	}, [timeline, startDate, endDate]);
 
 	return (
 		<>
 			<div className="dashboard-container">
 				<div className="filters-container">
-					<FilterByTimeline setSearchTerm={setSearchTerm} />
+					<FilterByTimeline setTimeline={setTimeline} />
 					<div className="multiple-filters">
 						<FilterByDate
 							startDate={startDate}
