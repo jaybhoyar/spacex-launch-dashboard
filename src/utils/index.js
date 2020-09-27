@@ -45,6 +45,7 @@ const generateSearchTerm = ({
 	endDate,
 	status,
 	setSearchTerm,
+	activePage,
 }) => {
 	let searchTerm = [];
 	if (startDate) {
@@ -60,6 +61,10 @@ const generateSearchTerm = ({
 		if (!startDate) {
 			searchTerm.push(`start=2002-05-06&`);
 		}
+	}
+	if (activePage) {
+		searchTerm.push(`limit=10`);
+		searchTerm.push(`offset=${(activePage - 1) * 10}`);
 	}
 
 	if (status === true) {

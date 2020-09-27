@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { Table } from "semantic-ui-react";
 
 import Modal from "./Modal";
+import Paginate from "./Paginate";
 import { getStatusLabel, getFormattedDate } from "../utils/index";
 
-function LaunchList({ launches }) {
+function LaunchList({ launches, activePage, setActivePage, launchCount }) {
 	const [ModalIsOpen, setModalIsOpen] = useState(false);
 	const [launchDetails, setLaunchDetails] = useState({});
 	const handleClose = () => setModalIsOpen(false);
@@ -82,6 +83,11 @@ function LaunchList({ launches }) {
 					</Table.Body>
 				</Table>
 			</div>
+			<Paginate
+				activePage={activePage}
+				setActivePage={setActivePage}
+				launchCount={launchCount}
+			/>
 		</>
 	);
 }
