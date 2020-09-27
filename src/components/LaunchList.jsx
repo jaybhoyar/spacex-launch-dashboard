@@ -84,7 +84,6 @@ function LaunchList({ launches, activePage, setActivePage, launchCount }) {
 				</Table>
 			</div>
 			<Paginate
-				launches={launches}
 				activePage={activePage}
 				setActivePage={setActivePage}
 				launchCount={launchCount}

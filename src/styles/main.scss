@@ -8,11 +8,19 @@ body {
 	font-weight: 400;
 	box-sizing: border-box;
 	outline: none !important;
-	background: rgb(255, 255, 255);
+	background: rgb(26, 26, 26);
+	background-image: url("/spacex-bg.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: left center;
+	background-attachment: fixed;
+	overflow-y: scroll;
+	min-height: 100vh;
 }
 body #fonts {
 	font-family: "Jost", sans-serif !important;
 }
+
 a {
 	outline: none !important;
 	cursor: pointer;
@@ -34,17 +42,13 @@ a {
 		}
 	}
 }
-.main-container {
-	background: url("/spacex-bg.jpg");
-	background-repeat: no-repeat;
-	background-position: center center;
-	background-size: cover;
-}
 .dashboard-container {
 	width: 80%;
 	margin: 0 auto !important;
 	display: flex;
 	flex-direction: column;
+	opacity: 0.95;
+
 	.filters-container {
 		padding: 1.7rem 0;
 	}
@@ -152,5 +156,7 @@ td {
 }
 
 .pagination-container {
-	margin: 1.5rem auto !important;
+	margin: 0 auto;
+	margin-top: 1.5rem;
+	padding-bottom: 2.5rem;
 }

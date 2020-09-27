@@ -1,7 +1,7 @@
 import React from "react";
 import { Pagination } from "semantic-ui-react";
 
-function Paginate({ launches, activePage, setActivePage, launchCount }) {
+function Paginate({ activePage, setActivePage, launchCount }) {
 	const handlePageChange = (e, { activePage }) => {
 		setActivePage(activePage);
 	};
