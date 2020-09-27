@@ -13,12 +13,12 @@ function LaunchList({
 	launchCount,
 }) {
 	const [modalIsOpen, setModalIsOpen] = useState(false);
-	const [launchDetails, setLaunchDetails] = useState({});
+	const [launch, setLaunch] = useState({});
 	const handleClose = () => setModalIsOpen(false);
 
 	const handleEvents = (launch) => {
 		setModalIsOpen(true);
-		setLaunchDetails(launch);
+		setLaunch(launch);
 	};
 
 	return (
@@ -27,7 +27,7 @@ function LaunchList({
 				<Modal
 					modalStatus={modalIsOpen}
 					handleClose={handleClose}
-					launchDetails={launchDetails}
+					launch={launch}
 				/>
 			) : (
 				""
@@ -58,11 +58,7 @@ function LaunchList({
 									return (
 										<Table.Row
 											key={launch.flight_number}
-											onClick={() =>
-												handleEvents(
-													launch.mission_name
-												)
-											}
+											onClick={() => handleEvents(launch)}
 										>
 											<Table.Cell>
 												{launch.flight_number}
