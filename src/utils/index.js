@@ -63,8 +63,9 @@ const generateSearchTerm = ({
 		}
 	}
 	if (activePage) {
-		searchTerm.push(`limit=10`);
-		searchTerm.push(`offset=${(activePage - 1) * 10}`);
+		const limit = 10;
+		searchTerm.push(`limit=${limit}`);
+		searchTerm.push(`offset=${(activePage - 1) * limit}`);
 	}
 
 	if (status === true) {
@@ -74,7 +75,6 @@ const generateSearchTerm = ({
 	}
 	searchTerm = searchTerm.join("&");
 	if (timeline !== "All") {
-		console.log(timeline);
 		setSearchTerm(`/${timeline}?${searchTerm}`);
 	} else {
 		setSearchTerm(`?${searchTerm}`);
