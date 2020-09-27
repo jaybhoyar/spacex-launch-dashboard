@@ -17,20 +17,24 @@ function Dashboard() {
 	const [status, setStatus] = useState("");
 	const [activePage, setActivePage] = useState(1);
 	const [launchCount, setLaunchCount] = useState("");
-
+	const [isLoading, setIsLoading] = useState(Boolean);
 	const getLaunches = async () => {
 		try {
+			setIsLoading(true);
 			const res = await axios.get(
 				`https://api.spacexdata.com/v3/launches${searchTerm}`
 			);
 			setLaunchCount(res.headers["spacex-api-count"]);
 			setlaunches(res.data);
+			setIsLoading(false);
 		} catch (error) {
 			console.log(error);
 		}
 	};
 	useEffect(() => {
+		setlaunches([]);
 		getLaunches();
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchTerm]);
 
@@ -61,6 +65,7 @@ function Dashboard() {
 					</div>
 				</div>
 				<LaunchList
+					isLoading={isLoading}
 					launches={launches}
 					activePage={activePage}
 					setActivePage={setActivePage}
