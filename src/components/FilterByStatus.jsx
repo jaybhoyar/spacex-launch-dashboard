@@ -19,7 +19,7 @@ const launchStatuses = [
 	},
 ];
 
-function FilterByStatus({ setStatus }) {
+function FilterByStatus({ status, setStatus }) {
 	const handleChange = (e, { value }) => {
 		setStatus(value);
 	};
@@ -28,8 +28,8 @@ function FilterByStatus({ setStatus }) {
 			<p className="filter-name-label text-align-center">Launch Status</p>
 			<Dropdown
 				fluid
+				value={status}
 				selection
-				defaultValue="All"
 				options={launchStatuses}
 				onChange={handleChange}
 			/>

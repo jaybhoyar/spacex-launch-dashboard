@@ -39,14 +39,13 @@ const getFormattedDate = (utcDate) => {
 // 	// return true;
 // };
 
-const generateSearchTerm = ({
+const generateSearchTerm = (
 	timeline,
 	startDate,
 	endDate,
 	status,
-	setSearchTerm,
-	activePage,
-}) => {
+	activePage
+) => {
 	let searchTerm = [];
 	if (startDate) {
 		startDate = moment(startDate).format("YYYY-MM-DD");
@@ -74,10 +73,10 @@ const generateSearchTerm = ({
 		searchTerm.push(`launch_success=false`);
 	}
 	searchTerm = searchTerm.join("&");
-	if (timeline !== "All") {
-		setSearchTerm(`/${timeline}?${searchTerm}`);
+	if (timeline === "All") {
+		return `/?${searchTerm}`;
 	} else {
-		setSearchTerm(`?${searchTerm}`);
+		return `/${timeline}?${searchTerm}`;
 	}
 };
 

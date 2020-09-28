@@ -8,6 +8,7 @@ function FilterByDate({ startDate, endDate, setStartDate, setEndDate }) {
 			<div className="text-align-center date-box">
 				<p className="filter-name-label ">Start Date</p>
 				<DatePicker
+					value={startDate}
 					selected={startDate}
 					selectsStart
 					isClearable
@@ -21,6 +22,7 @@ function FilterByDate({ startDate, endDate, setStartDate, setEndDate }) {
 			<div className="text-align-center date-box">
 				<p className="filter-name-label">End Date</p>
 				<DatePicker
+					value={endDate}
 					selected={endDate}
 					selectsStart
 					isClearable
