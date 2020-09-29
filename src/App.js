@@ -1,16 +1,18 @@
 import React from "react";
+import { withRouter } from "react-router";
+
 import Navbar from "./components/Navbar";
 import Dashboard from "./components/Dashboard";
 
-function App() {
+function App(props) {
 	return (
 		<div className="App" id="fonts">
 			<Navbar />
 			<div className="main-container">
-				<Dashboard />
+				<Dashboard props={props} />
 			</div>
 		</div>
 	);
 }
 
-export default App;
+export default withRouter(App);

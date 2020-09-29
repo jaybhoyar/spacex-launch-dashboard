@@ -1,27 +1,47 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { withRouter } from "react-router";
+
 import FilterByTimeline from "./FilterByTimeline";
 import FilterByDate from "./FilterByDate";
 import FilterByStatus from "./FilterByStatus";
 import LaunchList from "./LaunchList";
 
-import { generateSearchTerm, generateUrlParams } from "../utils/index";
+import { generateSearchTerm, getParamsFromUrl } from "../utils/index";
 
-function Dashboard(props) {
+function Dashboard({ props }) {
+	let urlTimeline;
+	let urlStartDate;
+	var urlEndDate;
+	var urlStatus;
+	urlTimeline = props.location.pathname.substring(1) || "";
+	const data = getParamsFromUrl(props.location.search);
+	if (data !== undefined) {
+		if (data.length === 3) {
+			urlStartDate = data[0];
+			urlEndDate = data[1];
+			urlStatus = data[2];
+		} else if (data.length === 2) {
+			urlStartDate = data[0];
+			urlEndDate = data[1];
+		} else if (data.length === 1) {
+			urlStatus = data[0];
+		}
+	}
+
+	console.log(data);
 	const [launches, setlaunches] = useState([]);
-
-	const [timeline, setTimeline] = useState("");
-	const [startDate, setStartDate] = useState(null);
-	const [endDate, setEndDate] = useState(null);
-	const [status, setStatus] = useState("");
+	const [timeline, setTimeline] = useState(urlTimeline || "");
+	const [date, setDate] = useState({
+		startDate: null,
+		endDate: null,
+	});
+	const [status, setStatus] = useState(urlStatus);
 	const [activePage, setActivePage] = useState(1);
 	const [launchCount, setLaunchCount] = useState("");
 	const [isLoading, setIsLoading] = useState(Boolean);
 
-	const searchTerm = props.location.pathname + props.location.search;
-	const getLaunches = async () => {
+	const getLaunches = async (searchTerm) => {
 		try {
 			setIsLoading(true);
 			const res = await axios.get(
@@ -34,38 +54,14 @@ function Dashboard(props) {
 			console.log(error);
 		}
 	};
-	useEffect(() => {
-		setlaunches([]);
-		getLaunches(searchTerm);
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchTerm]);
 
 	useEffect(() => {
-		const term = generateSearchTerm(
-			timeline,
-			startDate,
-			endDate,
-			status,
-			activePage
-		);
+		const term = generateSearchTerm(timeline, date, status, activePage);
 		props.history.push(term);
-	}, [timeline, startDate, endDate, status, activePage, props.history]);
+		getLaunches(term);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [timeline, date, status, activePage]);
 
-	useEffect(() => {
-		if (props.location.pathname) {
-			let word = props.location.pathname.substring(1);
-			setTimeline(word);
-		}
-	}, []);
-	useEffect(() => {
-		let res = generateUrlParams(props.location.search);
-		if (res === true) {
-			setStatus(res);
-		} else if (res === false) {
-			setStatus(res);
-		}
-	}, []);
 	return (
 		<>
 			<div className="dashboard-container">
@@ -75,12 +71,7 @@ function Dashboard(props) {
 						setTimeline={setTimeline}
 					/>
 					<div className="multiple-filters">
-						<FilterByDate
-							startDate={startDate}
-							endDate={endDate}
-							setStartDate={setStartDate}
-							setEndDate={setEndDate}
-						/>
+						<FilterByDate date={date} setDate={setDate} />
 						<FilterByStatus status={status} setStatus={setStatus} />
 					</div>
 				</div>
