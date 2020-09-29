@@ -1,16 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import { withRouter } from "react-router";
 import FilterByTimeline from "./FilterByTimeline";
 import FilterByDate from "./FilterByDate";
 import FilterByStatus from "./FilterByStatus";
 import LaunchList from "./LaunchList";
 
-import { generateSearchTerm } from "../utils/index";
+import { generateSearchTerm, generateUrlParams } from "../utils/index";
 
-function Dashboard() {
+function Dashboard(props) {
 	const [launches, setlaunches] = useState([]);
-	const [searchTerm, setSearchTerm] = useState(`?limit=10`);
+
 	const [timeline, setTimeline] = useState("");
 	const [startDate, setStartDate] = useState(null);
 	const [endDate, setEndDate] = useState(null);
@@ -18,6 +19,8 @@ function Dashboard() {
 	const [activePage, setActivePage] = useState(1);
 	const [launchCount, setLaunchCount] = useState("");
 	const [isLoading, setIsLoading] = useState(Boolean);
+
+	const searchTerm = props.location.pathname + props.location.search;
 	const getLaunches = async () => {
 		try {
 			setIsLoading(true);
@@ -33,27 +36,44 @@ function Dashboard() {
 	};
 	useEffect(() => {
 		setlaunches([]);
-		getLaunches();
+		getLaunches(searchTerm);
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchTerm]);
 
 	useEffect(() => {
-		generateSearchTerm({
+		const term = generateSearchTerm(
 			timeline,
 			startDate,
 			endDate,
 			status,
-			setSearchTerm,
-			activePage,
-		});
-	}, [timeline, startDate, endDate, status, activePage]);
+			activePage
+		);
+		props.history.push(term);
+	}, [timeline, startDate, endDate, status, activePage, props.history]);
 
+	useEffect(() => {
+		if (props.location.pathname) {
+			let word = props.location.pathname.substring(1);
+			setTimeline(word);
+		}
+	}, []);
+	useEffect(() => {
+		let res = generateUrlParams(props.location.search);
+		if (res === true) {
+			setStatus(res);
+		} else if (res === false) {
+			setStatus(res);
+		}
+	}, []);
 	return (
 		<>
 			<div className="dashboard-container">
 				<div className="filters-container">
-					<FilterByTimeline setTimeline={setTimeline} />
+					<FilterByTimeline
+						timeline={timeline}
+						setTimeline={setTimeline}
+					/>
 					<div className="multiple-filters">
 						<FilterByDate
 							startDate={startDate}
@@ -61,7 +81,7 @@ function Dashboard() {
 							setStartDate={setStartDate}
 							setEndDate={setEndDate}
 						/>
-						<FilterByStatus setStatus={setStatus} />
+						<FilterByStatus status={status} setStatus={setStatus} />
 					</div>
 				</div>
 				<LaunchList
@@ -76,4 +96,4 @@ function Dashboard() {
 	);
 }
 
-export default Dashboard;
+export default withRouter(Dashboard);

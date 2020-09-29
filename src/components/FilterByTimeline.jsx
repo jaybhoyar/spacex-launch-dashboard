@@ -19,7 +19,7 @@ const launchTimelines = [
 	},
 ];
 
-function FilterByTimeline({ setTimeline }) {
+function FilterByTimeline({ timeline, setTimeline }) {
 	const handleChange = (e, { value }) => {
 		setTimeline(value);
 	};
@@ -31,7 +31,7 @@ function FilterByTimeline({ setTimeline }) {
 			<Dropdown
 				fluid
 				selection
-				defaultValue="All"
+				value={timeline}
 				options={launchTimelines}
 				onChange={handleChange}
 			/>
