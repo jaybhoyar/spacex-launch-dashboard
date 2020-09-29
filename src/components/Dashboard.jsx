@@ -77,24 +77,14 @@ function Dashboard({ props }) {
 						<FilterByStatus status={status} setStatus={setStatus} />
 					</div>
 				</div>
-				{launches.length ? (
-					<LaunchList
-						isLoading={isLoading}
-						launches={launches}
-						activePage={activePage}
-						setActivePage={setActivePage}
-						launchCount={launchCount}
-					/>
-				) : (
-					<div className="center-image">
-						<img
-							src="https://cdn3.vectorstock.com/i/1000x1000/60/27/rocket-missile-crashed-error-not-found-concept-vector-18916027.jpg"
-							alt="404"
-							width="600"
-							height="500"
-						/>
-					</div>
-				)}
+
+				<LaunchList
+					isLoading={isLoading}
+					launches={launches}
+					activePage={activePage}
+					setActivePage={setActivePage}
+					launchCount={launchCount}
+				/>
 			</div>
 		</>
 	);

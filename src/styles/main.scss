@@ -248,6 +248,6 @@ td {
 }
 
 .center-image {
-	text-align: center;
-	display: inline;
+	display: flex !important;
+	justify-content: center !important;
 }
