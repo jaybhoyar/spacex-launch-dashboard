@@ -39,25 +39,19 @@ const getFormattedDate = (utcDate) => {
 // 	// return true;
 // };
 
-const generateSearchTerm = (
-	timeline,
-	startDate,
-	endDate,
-	status,
-	activePage
-) => {
+const generateSearchTerm = (timeline, date, status, activePage) => {
 	let searchTerm = [];
-	if (startDate) {
-		startDate = moment(startDate).format("YYYY-MM-DD");
-		searchTerm.push(`start=${startDate}`);
-		if (!endDate) {
+	if (date.startDate) {
+		date.startDate = moment(date.startDate).format("YYYY-MM-DD");
+		searchTerm.push(`start=${date.startDate}`);
+		if (!date.endDate) {
 			searchTerm.push(`end=2030-01-01`);
 		}
 	}
-	if (endDate) {
-		endDate = moment(endDate).format("YYYY-MM-DD");
-		searchTerm.push(`end=${endDate}`);
-		if (!startDate) {
+	if (date.endDate) {
+		date.endDate = moment(date.endDate).format("YYYY-MM-DD");
+		searchTerm.push(`end=${date.endDate}`);
+		if (!date.startDate) {
 			searchTerm.push(`start=2002-05-06&`);
 		}
 	}
@@ -80,32 +74,41 @@ const generateSearchTerm = (
 	}
 };
 
-const generateUrlParams = (term) => {
-	let mainTerm = term.substring(1);
+const getParamsFromUrl = (params) => {
+	var urlStatus;
+	var urlStartDate;
+	var urlEndDate;
+	let mainTerm = params.substring(1);
 	let arr = mainTerm.split("&");
-
-	if (arr.includes("launch_success=true")) {
-		return true;
-	} else if (arr.includes("launch_success=false")) {
-		return false;
+	if (arr.length === 5) {
+		urlStartDate = arr[0].split("=")[1];
+		urlEndDate = arr[1].split("=")[1];
+		urlStatus = getUrlStatus(arr[4]);
+		return [urlStartDate, urlEndDate, urlStatus];
+	} else if (arr.length === 4) {
+		urlStartDate = arr[0].split("=")[1];
+		urlEndDate = arr[1].split("=")[1];
+		return [urlStartDate, urlEndDate];
+	} else if (arr.length === 3) {
+		urlStatus = getUrlStatus(arr[2]);
+		return [urlStatus];
+	} else if (arr.length === 2) {
+		return arr.join("&");
 	}
-	// if (arr.length === 5) {
-	// 	urlStatus = arr[4].split("=")[1];
-	// 	urlStartDate = arr[0].split("=")[1];
-	// 	urlEndDate = arr[1].split("=")[1];
-	// 	return [urlStartDate, urlEndDate, urlStatus];
-	// } else if (arr.length === 4) {
-	// 	urlStartDate = arr[0].split("=")[1];
-	// 	urlEndDate = arr[1].split("=")[1];
-	// 	return [urlStartDate, urlEndDate];
-	// } else if (arr.length === 2) {
-	// 	return [];
-	// }
+};
+const getUrlStatus = (statusString) => {
+	var statusToBoolean;
+	if (statusString.split("=")[1] === "false") {
+		statusToBoolean = false;
+	} else if (statusString.split("=")[1] === "true") {
+		statusToBoolean = true;
+	}
+	return Boolean(statusToBoolean);
 };
 
 export {
 	getStatusLabel,
 	getFormattedDate,
 	generateSearchTerm,
-	generateUrlParams,
+	getParamsFromUrl,
 };
