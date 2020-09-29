@@ -28,8 +28,8 @@ function FilterByStatus({ status, setStatus }) {
 			<p className="filter-name-label text-align-center">Launch Status</p>
 			<Dropdown
 				fluid
-				value={status}
 				selection
+				value={status}
 				options={launchStatuses}
 				onChange={handleChange}
 			/>

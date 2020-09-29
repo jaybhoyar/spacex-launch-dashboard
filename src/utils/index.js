@@ -44,7 +44,6 @@ const generateSearchTerm = (
 	startDate,
 	endDate,
 	status,
-	setSearchTerm,
 	activePage
 ) => {
 	let searchTerm = [];

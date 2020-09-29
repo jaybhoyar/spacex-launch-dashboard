@@ -11,18 +11,24 @@ import { generateSearchTerm, getParamsFromUrl } from "../utils/index";
 
 function Dashboard({ props }) {
 	let urlTimeline;
-	var urlStatus;
+	let urlStatus;
+	let urlStartDate;
+	let urlEndDate;
 	urlTimeline = props.location.pathname.substring(1) || "";
 	const data = getParamsFromUrl(props.location.search);
 	if (data !== undefined) {
 		if (data.length === 3) {
+			urlStartDate = data[0];
+			urlEndDate = data[1];
 			urlStatus = data[2];
+		} else if (data.length === 2) {
+			urlStartDate = data[0];
+			urlEndDate = data[1];
 		} else if (data.length === 1) {
 			urlStatus = data[0];
 		}
 	}
 
-	console.log(data);
 	const [launches, setlaunches] = useState([]);
 	const [timeline, setTimeline] = useState(urlTimeline || "");
 	const [startDate, setStartDate] = useState(null);
