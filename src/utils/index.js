@@ -80,4 +80,32 @@ const generateSearchTerm = (
 	}
 };
 
-export { getStatusLabel, getFormattedDate, generateSearchTerm };
+const generateUrlParams = (term) => {
+	let mainTerm = term.substring(1);
+	let arr = mainTerm.split("&");
+
+	if (arr.includes("launch_success=true")) {
+		return true;
+	} else if (arr.includes("launch_success=false")) {
+		return false;
+	}
+	// if (arr.length === 5) {
+	// 	urlStatus = arr[4].split("=")[1];
+	// 	urlStartDate = arr[0].split("=")[1];
+	// 	urlEndDate = arr[1].split("=")[1];
+	// 	return [urlStartDate, urlEndDate, urlStatus];
+	// } else if (arr.length === 4) {
+	// 	urlStartDate = arr[0].split("=")[1];
+	// 	urlEndDate = arr[1].split("=")[1];
+	// 	return [urlStartDate, urlEndDate];
+	// } else if (arr.length === 2) {
+	// 	return [];
+	// }
+};
+
+export {
+	getStatusLabel,
+	getFormattedDate,
+	generateSearchTerm,
+	generateUrlParams,
+};

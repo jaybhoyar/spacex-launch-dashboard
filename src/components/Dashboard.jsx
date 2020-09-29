@@ -7,7 +7,7 @@ import FilterByDate from "./FilterByDate";
 import FilterByStatus from "./FilterByStatus";
 import LaunchList from "./LaunchList";
 
-import { generateSearchTerm } from "../utils/index";
+import { generateSearchTerm, generateUrlParams } from "../utils/index";
 
 function Dashboard(props) {
 	const [launches, setlaunches] = useState([]);
@@ -53,28 +53,18 @@ function Dashboard(props) {
 	}, [timeline, startDate, endDate, status, activePage, props.history]);
 
 	useEffect(() => {
-		let word = props.location.pathname.substring(1);
-		setTimeline(word);
-		// let mainTerm = props.location.search.substring(1);
-		// let arr = mainTerm.split("&");
-		// console.log(arr);
-		// var urlStatus;
-		// var urlStartDate;
-		// var urlEndDate;
-		// if (arr.length === 5) {
-		// 	urlStatus = arr[4].split("=")[1];
-		// 	urlStartDate = arr[0].split("=")[1];
-		// 	urlEndDate = arr[1].split("=")[1];
-		// 	setStartDate(urlStartDate);
-		// 	setEndDate(urlEndDate);
-		// 	setStatus(urlStatus);
-		// 	console.log(urlStatus, urlStartDate, urlEndDate);
-		// } else if (arr.length === 4) {
-		// 	urlStartDate = arr[0].split("=")[1];
-		// 	urlEndDate = arr[1].split("=")[1];
-		// 	setStartDate(urlStartDate);
-		// 	setEndDate(urlEndDate);
-		// }
+		if (props.location.pathname) {
+			let word = props.location.pathname.substring(1);
+			setTimeline(word);
+		}
+	}, []);
+	useEffect(() => {
+		let res = generateUrlParams(props.location.search);
+		if (res === true) {
+			setStatus(res);
+		} else if (res === false) {
+			setStatus(res);
+		}
 	}, []);
 	return (
 		<>
