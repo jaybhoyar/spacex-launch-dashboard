@@ -39,19 +39,26 @@ const getFormattedDate = (utcDate) => {
 // 	// return true;
 // };
 
-const generateSearchTerm = (timeline, date, status, activePage) => {
+const generateSearchTerm = (
+	timeline,
+	startDate,
+	endDate,
+	status,
+	setSearchTerm,
+	activePage
+) => {
 	let searchTerm = [];
-	if (date.startDate) {
-		date.startDate = moment(date.startDate).format("YYYY-MM-DD");
-		searchTerm.push(`start=${date.startDate}`);
-		if (!date.endDate) {
+	if (startDate) {
+		startDate = moment(startDate).format("YYYY-MM-DD");
+		searchTerm.push(`start=${startDate}`);
+		if (!endDate) {
 			searchTerm.push(`end=2030-01-01`);
 		}
 	}
-	if (date.endDate) {
-		date.endDate = moment(date.endDate).format("YYYY-MM-DD");
-		searchTerm.push(`end=${date.endDate}`);
-		if (!date.startDate) {
+	if (endDate) {
+		endDate = moment(endDate).format("YYYY-MM-DD");
+		searchTerm.push(`end=${endDate}`);
+		if (!startDate) {
 			searchTerm.push(`start=2002-05-06&`);
 		}
 	}

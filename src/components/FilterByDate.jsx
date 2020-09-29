@@ -2,38 +2,32 @@ import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-function FilterByDate({ date, setDate }) {
+function FilterByDate({ startDate, endDate, setStartDate, setEndDate }) {
 	return (
 		<div className="date-filter">
 			<div className="text-align-center date-box">
 				<p className="filter-name-label ">Start Date</p>
 				<DatePicker
-					value={date.startDate}
-					selected={date.startDate}
+					selected={startDate}
 					selectsStart
 					isClearable
 					dateFormat="yyyy/MM/dd"
 					showYearDropdown
 					showMonthDropdown
-					onChange={(d) => {
-						setDate({ startDate: d });
-					}}
+					onChange={(date) => setStartDate(date)}
 					placeholderText="Start Date"
 				/>
 			</div>
 			<div className="text-align-center date-box">
 				<p className="filter-name-label">End Date</p>
 				<DatePicker
-					value={date.endDate}
-					selected={date.endDate}
+					selected={endDate}
 					selectsStart
 					isClearable
 					dateFormat="yyyy/MM/dd"
 					showYearDropdown
 					showMonthDropdown
-					onChange={(d) => {
-						setDate({ endDate: d });
-					}}
+					onChange={(date) => setEndDate(date)}
 					placeholderText="End Date"
 				/>
 			</div>

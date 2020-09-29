@@ -11,19 +11,12 @@ import { generateSearchTerm, getParamsFromUrl } from "../utils/index";
 
 function Dashboard({ props }) {
 	let urlTimeline;
-	let urlStartDate;
-	var urlEndDate;
 	var urlStatus;
 	urlTimeline = props.location.pathname.substring(1) || "";
 	const data = getParamsFromUrl(props.location.search);
 	if (data !== undefined) {
 		if (data.length === 3) {
-			urlStartDate = data[0];
-			urlEndDate = data[1];
 			urlStatus = data[2];
-		} else if (data.length === 2) {
-			urlStartDate = data[0];
-			urlEndDate = data[1];
 		} else if (data.length === 1) {
 			urlStatus = data[0];
 		}
@@ -32,10 +25,8 @@ function Dashboard({ props }) {
 	console.log(data);
 	const [launches, setlaunches] = useState([]);
 	const [timeline, setTimeline] = useState(urlTimeline || "");
-	const [date, setDate] = useState({
-		startDate: null,
-		endDate: null,
-	});
+	const [startDate, setStartDate] = useState(null);
+	const [endDate, setEndDate] = useState(null);
 	const [status, setStatus] = useState(urlStatus);
 	const [activePage, setActivePage] = useState(1);
 	const [launchCount, setLaunchCount] = useState("");
@@ -56,11 +47,17 @@ function Dashboard({ props }) {
 	};
 
 	useEffect(() => {
-		const term = generateSearchTerm(timeline, date, status, activePage);
-		props.history.push(term);
+		const term = generateSearchTerm(
+			timeline,
+			startDate,
+			endDate,
+			status,
+			activePage
+		);
 		getLaunches(term);
+		props.history.push(term);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [timeline, date, status, activePage]);
+	}, [timeline, startDate, endDate, status, activePage]);
 
 	return (
 		<>
@@ -71,17 +68,33 @@ function Dashboard({ props }) {
 						setTimeline={setTimeline}
 					/>
 					<div className="multiple-filters">
-						<FilterByDate date={date} setDate={setDate} />
+						<FilterByDate
+							startDate={startDate}
+							endDate={endDate}
+							setStartDate={setStartDate}
+							setEndDate={setEndDate}
+						/>
 						<FilterByStatus status={status} setStatus={setStatus} />
 					</div>
 				</div>
-				<LaunchList
-					isLoading={isLoading}
-					launches={launches}
-					activePage={activePage}
-					setActivePage={setActivePage}
-					launchCount={launchCount}
-				/>
+				{launches.length ? (
+					<LaunchList
+						isLoading={isLoading}
+						launches={launches}
+						activePage={activePage}
+						setActivePage={setActivePage}
+						launchCount={launchCount}
+					/>
+				) : (
+					<div className="center-image">
+						<img
+							src="https://cdn3.vectorstock.com/i/1000x1000/60/27/rocket-missile-crashed-error-not-found-concept-vector-18916027.jpg"
+							alt="404"
+							width="600"
+							height="500"
+						/>
+					</div>
+				)}
 			</div>
 		</>
 	);
