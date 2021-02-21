@@ -1,8 +1,18 @@
 import React from "react";
-import "./App.css";
+import { withRouter } from "react-router";
 
-function App() {
-	return <div className="App"></div>;
+import Navbar from "./components/Navbar";
+import Dashboard from "./components/Dashboard";
+
+function App(props) {
+	return (
+		<div className="App" id="fonts">
+			<Navbar />
+			<div className="main-container">
+				<Dashboard props={props} />
+			</div>
+		</div>
+	);
 }
 
-export default App;
+export default withRouter(App);
